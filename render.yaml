@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: ecomarketplace-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        generateValue: true
+      # Configura estas variables en el dashboard de Render
+      # - key: DB_SERVER
+      #   value: tu_servidor_sql
+      # - key: DB_NAME
+      #   value: EcoMarketplace
+      # - key: DB_USER
+      #   value: tu_usuario
+      # - key: DB_PASSWORD
+      #   sync: false  # Configurar manualmente
+      # - key: DB_ENCRYPT
+      #   value: "true"
+      # - key: DB_TRUST_CERT
+      #   value: "true"
+
