@@ -79,7 +79,24 @@ const validateWaste = (req, res, next) => {
     errors.push('Categoría inválida');
   }
 
-  if (!quantity || quantity.trim().length === 0) {
+  // Manejar quantity como número o string
+  let quantityNum;
+  if (typeof quantity === 'string') {
+    const trimmed = quantity.trim();
+    if (trimmed.length === 0) {
+      errors.push('La cantidad es requerida');
+    } else {
+      quantityNum = parseFloat(trimmed);
+      if (isNaN(quantityNum) || quantityNum <= 0) {
+        errors.push('La cantidad debe ser un número positivo');
+      }
+    }
+  } else if (typeof quantity === 'number') {
+    quantityNum = quantity;
+    if (isNaN(quantityNum) || quantityNum <= 0) {
+      errors.push('La cantidad debe ser un número positivo');
+    }
+  } else {
     errors.push('La cantidad es requerida');
   }
 
